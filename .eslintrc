@@ -6,5 +6,8 @@
   "extends": "standard",
   "plugins": [
     "html"
-  ]
+  ],
+  "rules": {
+    "no-new": "off"
+  }
 }
