@@ -70,5 +70,3 @@ export default {
   margin-left auto
   cursor pointer
 </style>
-
-
