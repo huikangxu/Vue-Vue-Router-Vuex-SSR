@@ -1,6 +1,11 @@
 <!-- todo的主要部分 -->
 <template>
   <section class="real-app">
+    <!-- <div class="tab-container">
+      <tabs :value="filter" @change="handleChangeTab">
+        <tab :label="tab" :index="tab" v-for="tab in stats" :key="tab" />
+      </tabs>
+    </div> -->
     <input
       type="text"
       class="add-input"
@@ -14,20 +19,44 @@
       :key="todo.id"
       @del="deleteTodo"
     />
-    <Tabs
+    <Helper
       :filter="filter"
       :todos="todos"
       @toggle="toggleFilter"
       @clearAll="clearAllCompletedTodo"
     />
+    <router-view />
   </section>
 </template>
 
 <script>
 import Item from './item.vue'
-import Tabs from './tabs.vue'
+import Helper from './helper.vue'
 let id = 0
 export default {
+  beforeRouteEnter (to, from, next) {
+    console.log('todo before route enter')
+    next()
+    // console.log(this) // undefind
+    // next(vm => {
+    //   console.log(vm.id)
+    // })
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('todo before route update')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('todo before route leave')
+    next()
+    // if (global.confirm('sure?')) {
+    //   next()
+    // }
+  },
+  props: ['id'],
+  mounted () {
+    console.log('todo mounted')
+  },
   name: 'Todo',
   data () {
     return {
@@ -37,7 +66,7 @@ export default {
   },
   components: {
     Item,
-    Tabs
+    Helper
   },
   computed: {
     filterTodos () {
@@ -96,4 +125,8 @@ export default {
   padding 16px 16px 16px 36px
   border none
   box-shadow inset 0 -2px 1px rgba(0, 0, 0, 0.03)
+
+.tab-container
+  background-color #fff
+  padding 0 15px
 </style>

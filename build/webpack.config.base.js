@@ -16,13 +16,14 @@ const config = {
   // 以js文件作为入口，此处声明js文件的绝对路径；绝对路径不容易出错
   // 不能以app.vue为入口文件，因为这是个组件，不能挂载到html？
   // path.join是把_dirname和后面的路径拼接成绝对路径
-  entry: path.join(__dirname, '../client/index.js'), 
+  entry: path.join(__dirname, '../client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js', //开发环境用hash，正式环境用chunkhash？？不理解
-    path: path.join(__dirname, '../dist') // 绝对路径
+    path: path.join(__dirname, '../dist'), // 绝对路径
+    // publicPath: '/public/' // 对应webpack.config.base.js中的devSever中的publicPath配置
   },
   // 输入这个文件，，输出index.js 和其依赖的vue和app.vue，通过webpack打包成完整的bundle.js，就是浏览器能够直接运行的js代码
-  
+
   //加module这个配置：解决不支持处理.vue文件的问题：
   module: {
     rules: [
@@ -45,7 +46,10 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          plugins: ['syntax-dynamic-import']
+        }
       },
       //用的是stylus，所以这部分可以去掉
       // {
@@ -55,9 +59,9 @@ const config = {
       //     'css-loader'
       //   ]
       // },
-      
+
       //用的是extract-text-webpack-plugins对css单独打包，需要根据环境设置这部分，放在下面if(idDev)部分
-      // { 
+      // {
       //   // css预处理器：stylus
       //   //先是stylus-loader处理stylus代码为css，再给css-loader处理，再给style-loader
       //   test: /\.styl/,

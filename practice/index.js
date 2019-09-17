@@ -1,10 +1,8 @@
-import Vue from 'vue'
-
-// const div = document.createElement('div')
-// document.body.appendChild(div)
-
-new Vue({
-  // el: div,
-  el: '#root',
-  template: '<div>this is the content</div>'
-})
+// import './instance'
+// import './lifecycle'
+// import './data-binding'
+// import './computed'
+// import './directive'
+// import './component/define'
+// import './component/feature'
+import './component/render'

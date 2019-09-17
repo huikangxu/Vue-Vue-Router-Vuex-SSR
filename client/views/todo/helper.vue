@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'Tabs',
+  name: 'Helper',
   props: {
     filter: {
       type: String,

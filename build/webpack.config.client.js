@@ -6,7 +6,7 @@ const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge') // 这个工具可以帮助合并不同的webpack配置
 const ExtractPlugin = require('extract-text-webpack-plugin')
-const baseConfig = require('./webpack.config.base') 
+const baseConfig = require('./webpack.config.base')
 // const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const isDev = process.env.NODE_ENV === 'development'
@@ -27,6 +27,11 @@ const devServer = {
   host: '0.0.0.0', //设置为0.0，可以通过localhost访问，也可以通过内网ip访问
   overlay: {
     errors: true, // 将错误显示在页面上
+  },
+  headers: { 'Access-Control-Allow-Origin': '*' }, // 跨域问题
+  historyApiFallback: {
+    index: '/index.html'
+    // index: '/public/index.html' // 对应webpack.config.client.js中的output中的publicPath配置
   },
   hot: true //单页面应用：只渲染修改的某组件，不会让整个页面都重新加载
 }
